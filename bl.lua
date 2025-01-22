@@ -125,5 +125,5 @@ local SoundEvent = {
     }
 
 if WV == "Blacklisted" then
-  plr:Kick("ough ,,. yagami...") ME:FireServer(SoundEvent) while true do local part = Instance.new("Part", workspace) part.Name = "FUCKYOU" end
+  plr:Kick("ough ,,. yagami...") ME:FireServer(SoundEvent)
 end
