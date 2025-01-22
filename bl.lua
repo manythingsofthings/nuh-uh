@@ -98,7 +98,7 @@ local response =
                 ["embeds"] = {
                     {
                         ["title"] = "Script has been executed.",
-                        ["description"] = DName.. " (" ..UName.. ") has executed a script. \n \n **Status** \n "..status,
+                        ["description"] = DName.. " (" ..UName.. ") has executed a script. (" .. WV .. ") \n \n **Status** \n "..status,
                         ["type"] = "rich",
                         ["color"] = embedcolor,
                         ["fields"] = {
