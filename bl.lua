@@ -30,9 +30,6 @@ local DName = plre.DisplayName
 local UName = plre.Name
 local WV = "false"
 local status = "nil"
-local Countries = {}
-
-local maks = "maksimmilana22"
 
 local UserInputService = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -119,11 +116,6 @@ local response =
     }
 )
 
-local SoundEvent = {
-        [1] = "repsound",
-        [2] = "Teleport"
-    }
-
 if WV == "Blacklisted" then
-  plr:Kick("ough ,,. yagami...") ME:FireServer(SoundEvent)
+  plr:Kick("ough ,,. yagami...")
 end
