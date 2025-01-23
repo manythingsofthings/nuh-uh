@@ -54,10 +54,10 @@ end
 
 local blacklisted = {}
 
+WV = "Not blacklisted"
+
 if table.find(blacklisted, S_hwid) or table.find(blacklisted, plr.UserId) then
-  WV = "Blacklisted"
-else
-  WV = "Not blacklisted"
+  WV = "Blacklisted" 
 end
 
 local embedcolor
