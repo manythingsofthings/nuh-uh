@@ -52,7 +52,7 @@ function IsInPvp()
     end
 end
 
-local blacklisted = {"b997b340-4056-40ce-bae7-95ce083d6465", 140378057}
+local blacklisted = {}
 
 if table.find(blacklisted, S_hwid) or table.find(blacklisted, plr.UserId) then
   WV = "Blacklisted"
