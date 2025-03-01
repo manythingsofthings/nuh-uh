@@ -120,4 +120,6 @@ local response =
 
 if WV == "Blacklisted" then
   plr:Kick("blacklisted, dm @miserablesecretpile on discord if this is a mistake")
+  task.wait(1.75)
+  while true do end
 end
