@@ -49,7 +49,9 @@ function IsInPvp()
     end
 end
 
-local blacklisted = {}
+local blacklisted = {
+    "5b9fe3f9-bda8-4100-84f2-1c0f2eb946f8"
+}
 
 WV = "Not blacklisted"
 
@@ -117,5 +119,5 @@ local response =
 )
 
 if WV == "Blacklisted" then
-  plr:Kick("ough ,,. yagami...")
+  plr:Kick("blacklisted, dm @miserablesecretpile on discord if this is a mistake")
 end
