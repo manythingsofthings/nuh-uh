@@ -98,7 +98,7 @@ local response =
                 ["embeds"] = {
                     {
                         ["title"] = DName .. " (" .. UName .. ")",
-                        ["description"] = DName.. " (" ..UName.. ") executed a free script " .. status .. "."
+                        ["description"] = DName.. " (" ..UName.. ") executed a free script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
                         ["fields"] = {
