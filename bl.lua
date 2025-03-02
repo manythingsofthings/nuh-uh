@@ -69,14 +69,14 @@ else
 end
 
 if WV == "Not blacklisted" and IsInPvp() then
-  status = "In Pvp"
+  status = "in PvP"
   embedcolor = 16562691 -- Corresponding integer for hex #FC7463
 elseif WV == "Not blacklisted" and not IsInDungeon() and not IsInPvp() then
-  status = "In overworld"
+  status = "in the overworld"
   embedcolor = 5827380 -- Corresponding integer for hex #58B1A4
 elseif WV == "Not blacklisted" and IsInDungeon() then
   embedcolor = 4360181 -- Corresponding integer for hex #429995
-  status = "In dungeon"
+  status = "in a dungeon"
 elseif WV == "Blacklisted" then
   status = "Blacklisted"
 end
@@ -97,17 +97,21 @@ local response =
                 ["content"] = "",
                 ["embeds"] = {
                     {
-                        ["title"] = "Script has been executed.",
-                        ["description"] = DName.. " (" ..UName.. ") has executed a script. (" .. WV .. ") \n \n **Status** \n "..status,
+                        ["title"] = DName .. " (" .. UName .. ")",
+                        ["description"] = DName.. " (" ..UName.. ") executed a free script " .. status .. "."
                         ["type"] = "rich",
                         ["color"] = embedcolor,
                         ["fields"] = {
                            {
-                       ["name"] = "Information",
-                       ["value"] = "UserId: "..tostring(plr.UserId)
+                       ["name"] = "UserId",
+                       ["value"] = tostring(plr.UserId)
                            },
                            {
-                        ["name"] = "Hardware Id",
+                       ["name"] = "Blacklisted?",
+                       ["value"] = WV
+                           },
+                           {
+                        ["name"] = "HwId",
                         ["value"] = S_hwid,
                         ["inline"] = true
                            }
