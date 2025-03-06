@@ -50,8 +50,6 @@ function IsInPvp()
 end
 
 local blacklisted = {
-    "5b9fe3f9-bda8-4100-84f2-1c0f2eb946f8",
-    7672675492,
 }
 
 WV = "Not blacklisted"
