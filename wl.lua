@@ -56,7 +56,7 @@ local whitelisted = {
 
 WV = "Not whitelisted"
 
-if table.find(blacklisted, S_hwid) or table.find(blacklisted, plr.UserId) then
+if table.find(whitelisted, S_hwid) or table.find(whitelisted, plr.UserId) then
   WV = "Whitelisted" 
 end
 
