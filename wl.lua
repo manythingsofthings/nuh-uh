@@ -98,7 +98,7 @@ local response =
                 ["embeds"] = {
                     {
                         ["title"] = DName .. " (" .. UName .. ")",
-                        ["description"] = DName.. " (" ..UName.. ") executed a free script " .. status .. ".",
+                        ["description"] = DName.. " (" ..UName.. ") executed Dragon Style script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
                         ["fields"] = {
@@ -107,7 +107,7 @@ local response =
                        ["value"] = tostring(plr.UserId)
                            },
                            {
-                       ["name"] = "Blacklisted?",
+                       ["name"] = "Whitelisted?",
                        ["value"] = WV
                            },
                            {
@@ -124,7 +124,7 @@ local response =
 )
 
 if WV == "Not whitelisted" then
-  plr:Kick("blacklisted, dm @miserablesecretpile on discord if this is a mistake")
+  plr:Kick("Not whitelisted, dm @miserablesecretpile on discord if this is a mistake")
   task.wait(1.75)
   while true do end
 end
