@@ -50,9 +50,11 @@ function IsInPvp()
 end
 
 local whitelisted = {
-   "5645ccda-d606-495c-9e4e-9b367d738af2",
-   "154e6130-c827-4eed-ae5c-62a9d84f1b1c",
-   "b5da7edf-f976-4636-8f31-dcc385f09d08",
+    "5645ccda-d606-495c-9e4e-9b367d738af2",
+    "154e6130-c827-4eed-ae5c-62a9d84f1b1c",
+    "b5da7edf-f976-4636-8f31-dcc385f09d08",
+    "fce08cb6-98ec-4a29-b509-3d0ae3705e80",
+    8238344169,
     2981703917,
     105111491,
     3542547505,
