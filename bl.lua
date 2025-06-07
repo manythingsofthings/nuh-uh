@@ -80,6 +80,30 @@ elseif WV == "Blacklisted" then
   status = "Blacklisted"
 end
 
+local function GetPlrThumbnail()
+    local Link = "https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=" .. plr.UserId .. "&size=150x150&format=Png"
+    
+    local success, Response = pcall(function()
+        return request({Url = Link, Method = "GET"})
+    end)
+
+    if not success then
+        warn("Failed to fetch player thumbnail: " .. tostring(Response))
+        return "https://via.placeholder.com/150" -- Placeholder image URL
+    end
+
+    local successDecode, data = pcall(function()
+        return HttpService:JSONDecode(Response.Body)
+    end)
+
+    if not successDecode or not data.data or #data.data == 0 then
+        warn("Failed to decode response or no data found.")
+        return "https://via.placeholder.com/150" -- Placeholder image URL
+    end
+
+    return data.data[1].imageUrl
+end
+
 if not S_hwid then
     S_hwid = "Unknown"
 end
@@ -100,6 +124,9 @@ local response =
                         ["description"] = DName.. " (" ..UName.. ") executed a free script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
+                        ["thumbnail"] = {
+                        	["url"] = GetPlrThumbnail()
+                        },
                         ["fields"] = {
                            {
                        ["name"] = "UserId",
