@@ -131,20 +131,20 @@ local response =
                         ["description"] = DName.. " (" ..UName.. ") executed Dragon Style script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
-                        ["thumbnail"] = GetPlrThumbnail()
+                        ["thumbnail"] = GetPlrThumbnail(),
                         ["fields"] = {
                            {
-                       ["name"] = "UserId",
-                       ["value"] = tostring(plr.UserId)
+                    		   ["name"] = "UserId",
+                 		      ["value"] = tostring(plr.UserId)
                            },
                            {
-                       ["name"] = "Whitelisted?",
-                       ["value"] = WV
+                		       ["name"] = "Whitelisted?",
+               		        ["value"] = WV
                            },
                            {
-                        ["name"] = "HwId",
-                        ["value"] = S_hwid,
-                        ["inline"] = true
+		                        ["name"] = "HwId",
+		                        ["value"] = S_hwid,
+		                        ["inline"] = true
                            }
                         }
                     }
