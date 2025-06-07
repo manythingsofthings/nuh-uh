@@ -1,19 +1,33 @@
 local HttpService = game:GetService("HttpService")
 
 function from_base64(data)
-    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    data = string.gsub(data, '[^'..b..'=]', '')
-    return (data:gsub('.', function(x)
-        if (x == '=') then return '' end
-        local r,f='',(b:find(x)-1)
-        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-        if (#x ~= 8) then return '' end
-        local c=0
-        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
-        return string.char(c)
-    end))
+    local b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    data = string.gsub(data, "[^" .. b .. "=]", "")
+    return (data:gsub(
+        ".",
+        function(x)
+            if (x == "=") then
+                return ""
+            end
+            local r, f = "", (b:find(x) - 1)
+            for i = 6, 1, -1 do
+                r = r .. (f % 2 ^ i - f % 2 ^ (i - 1) > 0 and "1" or "0")
+            end
+            return r
+        end
+    ):gsub(
+        "%d%d%d?%d?%d?%d?%d?%d?",
+        function(x)
+            if (#x ~= 8) then
+                return ""
+            end
+            local c = 0
+            for i = 1, 8 do
+                c = c + (x:sub(i, i) == "1" and 2 ^ (8 - i) or 0)
+            end
+            return string.char(c)
+        end
+    ))
 end
 
 local whbase = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv"
@@ -50,20 +64,27 @@ function IsInPvp()
 end
 
 local function GetPlrThumbnail()
-    local Link = "https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=" .. plr.UserId .. "&size=150x150&format=Png"
-    
-    local success, Response = pcall(function()
-        return request({Url = Link, Method = "GET"})
-    end)
+    local Link =
+        "https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=" .. plr.UserId .. "&size=150x150&format=Png"
+
+    local success, Response =
+        pcall(
+        function()
+            return request({Url = Link, Method = "GET"})
+        end
+    )
 
     if not success then
         warn("Failed to fetch player thumbnail: " .. tostring(Response))
         return "https://via.placeholder.com/150" -- Placeholder image URL
     end
 
-    local successDecode, data = pcall(function()
-        return HttpService:JSONDecode(Response.Body)
-    end)
+    local successDecode, data =
+        pcall(
+        function()
+            return HttpService:JSONDecode(Response.Body)
+        end
+    )
 
     if not successDecode or not data.data or #data.data == 0 then
         warn("Failed to decode response or no data found.")
@@ -81,34 +102,34 @@ local whitelisted = {
     8238344169,
     2981703917,
     105111491,
-    3542547505,
+    3542547505
 }
 
 WV = "Not whitelisted"
 
 if table.find(whitelisted, S_hwid) or table.find(whitelisted, plr.UserId) then
-  WV = "Whitelisted" 
+    WV = "Whitelisted"
 end
 
 local embedcolor
 
 if WV == "Whitelisted" then
-  embedcolor = 14887209 -- Corresponding integer for hex #42A86B
+    embedcolor = 14887209 -- Corresponding integer for hex #42A86B
 else
-  embedcolor = 4388219 -- Corresponding integer for hex #E31319
+    embedcolor = 4388219 -- Corresponding integer for hex #E31319
 end
 
 if WV == "Whitelisted" and IsInPvp() then
-  status = "in PvP"
-  embedcolor = 16562691 -- Corresponding integer for hex #FC7463
+    status = "in PvP"
+    embedcolor = 16562691 -- Corresponding integer for hex #FC7463
 elseif WV == "Whitelisted" and not IsInDungeon() and not IsInPvp() then
-  status = "in the overworld"
-  embedcolor = 5827380 -- Corresponding integer for hex #58B1A4
+    status = "in the overworld"
+    embedcolor = 5827380 -- Corresponding integer for hex #58B1A4
 elseif WV == "Whitelisted" and IsInDungeon() then
-  embedcolor = 4360181 -- Corresponding integer for hex #429995
-  status = "in a dungeon"
+    embedcolor = 4360181 -- Corresponding integer for hex #429995
+    status = "in a dungeon"
 elseif WV == "Not whitelisted" then
-  status = "while not whitelisted"
+    status = "while not whitelisted"
 end
 
 if not S_hwid then
@@ -128,26 +149,26 @@ local response =
                 ["embeds"] = {
                     {
                         ["title"] = DName .. " (" .. UName .. ")",
-                        ["description"] = DName.. " (" ..UName.. ") executed Dragon Style script " .. status .. ".",
+                        ["description"] = DName .. " (" .. UName .. ") executed Dragon Style script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
                         ["thumbnail"] = {
-							["url"] = GetPlrThumbnail()
-						},
+                            ["url"] = GetPlrThumbnail()
+                        },
                         ["fields"] = {
-                           {
-                    		   ["name"] = "UserId",
-                 		      ["value"] = tostring(plr.UserId)
-                           },
-                           {
-                		       ["name"] = "Whitelisted?",
-               		        ["value"] = WV
-                           },
-                           {
-		                        ["name"] = "HwId",
-		                        ["value"] = S_hwid,
-		                        ["inline"] = true
-                           }
+                            {
+                                ["name"] = "UserId",
+                                ["value"] = tostring(plr.UserId)
+                            },
+                            {
+                                ["name"] = "Whitelisted?",
+                                ["value"] = WV
+                            },
+                            {
+                                ["name"] = "HwId",
+                                ["value"] = S_hwid,
+                                ["inline"] = true
+                            }
                         }
                     }
                 }
@@ -157,7 +178,8 @@ local response =
 )
 
 if WV == "Not whitelisted" then
-  plr:Kick("Not whitelisted, dm @miserablesecretpile on discord if this is a mistake")
-  task.wait(1.75)
-  while true do end
+    plr:Kick("Not whitelisted, dm @miserablesecretpile on discord if this is a mistake")
+    task.wait(1.75)
+    while true do
+    end
 end
