@@ -131,7 +131,9 @@ local response =
                         ["description"] = DName.. " (" ..UName.. ") executed Dragon Style script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
-                        ["thumbnail"] = GetPlrThumbnail(),
+                        ["thumbnail"] = {
+							["url"] = GetPlrThumbnail()
+						},
                         ["fields"] = {
                            {
                     		   ["name"] = "UserId",
