@@ -49,6 +49,30 @@ function IsInPvp()
     end
 end
 
+local function GetPlrThumbnail()
+    local Link = "https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=" .. plr.UserId .. "&size=150x150&format=Png"
+    
+    local success, Response = pcall(function()
+        return request({Url = Link, Method = "GET"})
+    end)
+
+    if not success then
+        warn("Failed to fetch player thumbnail: " .. tostring(Response))
+        return "https://via.placeholder.com/150" -- Placeholder image URL
+    end
+
+    local successDecode, data = pcall(function()
+        return HttpService:JSONDecode(Response.Body)
+    end)
+
+    if not successDecode or not data.data or #data.data == 0 then
+        warn("Failed to decode response or no data found.")
+        return "https://via.placeholder.com/150" -- Placeholder image URL
+    end
+
+    return data.data[1].imageUrl
+end
+
 local whitelisted = {
     "5645ccda-d606-495c-9e4e-9b367d738af2",
     "154e6130-c827-4eed-ae5c-62a9d84f1b1c",
@@ -107,6 +131,7 @@ local response =
                         ["description"] = DName.. " (" ..UName.. ") executed Dragon Style script " .. status .. ".",
                         ["type"] = "rich",
                         ["color"] = embedcolor,
+                        ["thumbnail"] = GetPlrThumbnail()
                         ["fields"] = {
                            {
                        ["name"] = "UserId",
